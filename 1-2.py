@@ -170,3 +170,4 @@ if __name__ == '__main__':
     #図の表示
     plt.tight_layout()
     plt.show()
+    

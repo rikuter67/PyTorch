@@ -98,15 +98,45 @@ X_xor = np.random.randn(200,2) #標準正規分布に従う乱数で200行2列�
 y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
 # 排他的論理和の値が芯の場合は１，偽の場合は０を割り当てる
 y_xor = np.where(y_xor, 1, 0)
-# ラベル１を青の四角でプロット
-plt.scatter(X_xor[y_xor == 1, 0], X_xor[y_xor == 1, 1], c='royalblue', marker='s', label='Class 1')
-# ラベル０を赤の円でプロット
-plt.scatter(X_xor[y_xor == 0, 0], X_xor[y_xor == 0, 1], c='tomato', marker='o', label='Class 0')
-# 軸の範囲を設定
-plt.xlim([-3, 3])
-plt.ylim([-3, 3])
-plt.xlabel('Feature 1')
-plt.ylabel('Feature 2')
-plt.legend(loc='best')
+# # ラベル１を青の四角でプロット
+# plt.scatter(X_xor[y_xor == 1, 0], X_xor[y_xor == 1, 1], c='royalblue', marker='s', label='Class 1')
+# # ラベル０を赤の円でプロット
+# plt.scatter(X_xor[y_xor == 0, 0], X_xor[y_xor == 0, 1], c='tomato', marker='o', label='Class 0')
+# # 軸の範囲を設定
+# plt.xlim([-3, 3])
+# plt.ylim([-3, 3])
+# plt.xlabel('Feature 1')
+# plt.ylabel('Feature 2')
+# plt.legend(loc='best')
+# plt.tight_layout()
+# plt.show()
+
+
+# # RBFカーネルによるSVMのインスタンスを生成
+# svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
+# svm.fit(X_xor, y_xor)
+# plot_decision_regions(X_xor, y_xor, classifier=svm)
+# plt.legend(loc='upper left')
+# plt.tight_layout()
+# plt.show()
+
+
+# RBFカーネルによるSVMのインスタンスを生成（2つのパラメータを変更）
+# svm = SVC(kernel='rbf', random_state=1, gamma=0.2, C=1.0)
+# svm.fit(X_train_std, y_train)
+# plot_decision_regions(X_combined_std, y_combined, classifier=svm, test_idx=range(105,150))
+# plt.xlabel('Petal length [standardized]')
+# plt.ylabel('Petal width [standardized]')
+# plt.legend(loc='upper left')
+# plt.tight_layout()
+# plt.show()
+
+# RBFカーネルによるSVMのインスタンスを生成（γパラメータを変更）
+svm = SVC(kernel='rbf', random_state=1, gamma=100.0, C=1.0)
+svm.fit(X_train_std, y_train)
+plot_decision_regions(X_combined_std, y_combined, classifier=svm, test_idx=range(105,150))
+plt.xlabel('Petal length [standardized]')
+plt.ylabel('Petal width [standardized]')
+plt.legend(loc='upper left')
 plt.tight_layout()
 plt.show()

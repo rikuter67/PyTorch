@@ -75,10 +75,33 @@ X_combined_std = np.vstack((X_train_std, X_test_std))
 # 訓練データとテストデータのクラスラベルを結合
 y_combined = np.hstack((y_train, y_test))
 
-# 決定領域をプロット
-plot_decision_regions(X_combined_std, y_combined, classifier=lr, test_idx=range(105,150))
-plt.xlabel('Petal length [standardized]') # 軸ラベルを設定
-plt.ylabel('Petal width [standardized]')
-plt.legend(loc='upper left') # 凡例を設定
-plt.tight_layout()
+# # 決定領域をプロット
+# plot_decision_regions(X_combined_std, y_combined, classifier=lr, test_idx=range(105,150))
+# plt.xlabel('Petal length [standardized]') # 軸ラベルを設定
+# plt.ylabel('Petal width [standardized]')
+# plt.legend(loc='upper left') # 凡例を設定
+# plt.tight_layout()
+# plt.show()
+
+# print(lr.predict_proba(X_test_std[:3,:]))
+# print(lr.predict_proba(X_test_std[:3,:]).argmax(axis=1))
+# print(lr.predict(X_test_std[:3,:]))
+# print(lr.predict(X_test_std[0,:].reshape(1,-1)))
+
+weights, params = [], [] # 重み係数と逆正則化パラメータのリストを生成
+# 10個の逆正則化パラメータに対応するロジスティック回帰モデルを処理
+for c in np.arange(-5, 5):
+    lr = LogisticRegression(C=10.**c, multi_class='ovr')
+    lr.fit(X_train_std, y_train)
+    weights.append(lr.coef_[1]) # 重み係数を格納
+    params.append(10.**c) # 逆正則化パラメータを格納
+
+weights = np.array(weights) #重み係数をNumpy配列に変換
+# 横軸に逆正則化パラメータ、縦軸に重み係数をプロット
+plt.plot(params, weights[:, 0], label='Petal length')
+plt.plot(params, weights[:, 1], linestyle='--', label='Petal width')
+plt.ylabel('Weight coefficient')
+plt.xlabel('C')
+plt.legend(loc='upper left')
+plt.xscale('log') #横軸を対数スケールに設定
 plt.show()

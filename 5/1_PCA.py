@@ -27,6 +27,7 @@ tot = sum(eigen_vals)
 var_exp = [(i / tot) for i in sorted(eigen_vals, reverse=True)]
 # 分散説明率の累積和を所得
 cum_var_exp = np.cumsum(var_exp)
+
 import matplotlib.pyplot as plt
 # # 分散説明率の棒グラフを作成
 # plt.bar(range(1,14), var_exp, align='center', label='Individual explained variance')

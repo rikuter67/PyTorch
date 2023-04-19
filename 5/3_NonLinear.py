@@ -16,6 +16,7 @@ X_digits = digits.data
 
 from sklearn.manifold import TSNE
 
+# エラーが消えない
 tsne = TSNE(n_components=2,
             init='pca',
             random_state=123)

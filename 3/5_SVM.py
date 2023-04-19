@@ -15,7 +15,7 @@ y = iris.target
 # print('Class labels:', np.unique(y))
 
 from sklearn.model_selection import train_test_split
-# 訓練データとテストデータに分割：全体の30％をテストデータにする
+# 訓練データとテストデータに分割:全体の30%をテストデータにする
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1, stratify = y)
 
 from sklearn.preprocessing import StandardScaler

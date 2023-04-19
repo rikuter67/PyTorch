@@ -31,7 +31,7 @@ train_sizes, train_scores, test_scores = learning_curve(estimator=pipe_lr,
 train_mean = np.mean(train_scores, axis=1)
 train_std = np.std(train_scores, axis=1)
 test_mean = np.mean(test_scores, axis=1)
-test_std = np.std(test_scores, axis=1)
+tealphast_std = np.std(test_scores, axis=1)
 
 plt.plot(train_sizes, train_mean,
          color='blue', marker='o',
